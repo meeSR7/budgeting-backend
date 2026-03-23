@@ -16,7 +16,7 @@ export class AuthService {
     const existingUser = await this.userService.findByEmail(dto.email);
 
     if(existingUser){
-      throw new BadRequestException("User with this email already exists");
+      throw new BadRequestException("User with this email already exists, please choose another email");
     }
 
     const hashedPassword = await bcrypt.hash(dto.password, 10);
