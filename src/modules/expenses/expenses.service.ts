@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateExpenseDto } from './dto/create-expense.dto';
 import { UpdateExpenseDto } from './dto/update-expense.dto';
 import { PrismaService } from '../../prisma/prisma.service';
@@ -7,32 +7,49 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class ExpensesService {
   constructor(private prisma: PrismaService) {}
 
-  create(createExpenseDto: CreateExpenseDto) {
+  create(createExpenseDto: CreateExpenseDto, userId: string) {
     return this.prisma.expense.create({
-      data: { ...createExpenseDto, userId: 'dummy-user-1' },
+      data: { ...createExpenseDto, userId },
     });
   }
 
-  findAll() {
+  findAll(userId: string) {
     return this.prisma.expense.findMany({
+      where: { userId },
       orderBy: { date: 'desc' },
     });
   }
 
-  findOne(id: string) {
-    return this.prisma.expense.findUnique({
-      where: { id },
+  async findOne(id: string, userId: string) {
+    const expense = await this.prisma.expense.findFirst({
+      where: { id, userId },
     });
+    if (!expense) {
+      throw new NotFoundException('Expense not found');
+    }
+    return expense;
   }
 
-  update(id: string, updateExpenseDto: UpdateExpenseDto) {
+  async update(id: string, updateExpenseDto: UpdateExpenseDto, userId: string) {
+    const expense = await this.prisma.expense.findFirst({
+      where: { id, userId },
+    });
+    if (!expense) {
+      throw new NotFoundException('Expense not found');
+    }
     return this.prisma.expense.update({
       where: { id },
       data: updateExpenseDto,
     });
   }
 
-  remove(id: string) {
+  async remove(id: string, userId: string) {
+    const expense = await this.prisma.expense.findFirst({
+      where: { id, userId },
+    });
+    if (!expense) {
+      throw new NotFoundException('Expense not found');
+    }
     return this.prisma.expense.delete({
       where: { id },
     });
