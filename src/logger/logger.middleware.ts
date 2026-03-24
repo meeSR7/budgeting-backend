@@ -11,7 +11,6 @@ export class LoggerMiddleware implements NestMiddleware {
 
       const log = `${new Date().toISOString()} | ${req.method} ${req.originalUrl} | ${res.statusCode} | ${duration}ms\n`;
       fs.appendFileSync('logs.txt', log);
-      console.log(log);
     });
     next();
   }

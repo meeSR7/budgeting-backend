@@ -12,6 +12,7 @@ import { LoggerMiddleware } from './logger/logger.middleware';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      // Load environment variables from .env file
       isGlobal: true,
     }),
     PrismaModule,
