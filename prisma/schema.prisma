@@ -49,8 +49,8 @@ model Income {
   date      DateTime
   createdAt DateTime @default(now())
 
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String           // Foreign key to User model
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade) // Define relation to User with cascade delete
 
   @@index([userId])
 }

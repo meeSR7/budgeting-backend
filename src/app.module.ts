@@ -8,6 +8,7 @@ import { UsersModule } from './modules/users/users.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerMiddleware } from './logger/logger.middleware';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { LoggerMiddleware } from './logger/logger.middleware';
     UsersModule,
     ExpensesModule,
     IncomeModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],

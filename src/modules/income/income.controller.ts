@@ -23,7 +23,10 @@ export class IncomeController {
   constructor(private readonly incomeService: IncomeService) {}
 
   @Post()
-  create(@Body() createIncomeDto: CreateIncomeDto, @GetUser('userId') userId: string) {
+  create(
+    @Body() createIncomeDto: CreateIncomeDto,
+    @GetUser('userId') userId: string,
+  ) {
     return this.incomeService.create(createIncomeDto, userId);
   }
 
@@ -39,9 +42,9 @@ export class IncomeController {
 
   @Patch(':id')
   update(
-    @Param('id') id: string, 
-    @Body() updateIncomeDto: UpdateIncomeDto, 
-    @GetUser('userId') userId: string
+    @Param('id') id: string,
+    @Body() updateIncomeDto: UpdateIncomeDto,
+    @GetUser('userId') userId: string,
   ) {
     return this.incomeService.update(id, updateIncomeDto, userId);
   }

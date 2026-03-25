@@ -15,16 +15,15 @@ export class IncomeService {
 
   findAll(userId: string) {
     return this.prisma.income.findMany({
-      where: { userId },  
+      where: { userId },
       orderBy: { date: 'desc' },
     });
   }
 
   async findOne(id: string, userId: string) {
-
     const income = await this.prisma.income.findFirst({
       where: { id, userId },
-    })
+    });
     if (!income) {
       throw new NotFoundException('Income not found');
     }
