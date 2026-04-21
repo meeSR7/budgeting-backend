@@ -1,6 +1,6 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { DashboardService } from './dashboard.service';
-import { GetUser } from 'src/common/decorators/get-user.decorator';
+import { GetUser } from '../../common/decorators/get-user.decorator';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { DashboardQueryDto } from './dto/dashboard-query.dto';
 

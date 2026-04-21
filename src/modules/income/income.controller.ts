@@ -12,7 +12,7 @@ import { IncomeService } from './income.service';
 import { CreateIncomeDto } from './dto/create-income.dto';
 import { UpdateIncomeDto } from './dto/update-income.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { GetUser } from 'src/common/decorators/get-user.decorator';
+import { GetUser } from '../../common/decorators/get-user.decorator';
 
 @UseGuards(JwtAuthGuard)
 @Controller({
